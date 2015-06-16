@@ -19,4 +19,14 @@ class Message
         $this->id = $id;
         $this->content = $content;
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getContent()
+    {
+        return $this->content;
+    }
 }

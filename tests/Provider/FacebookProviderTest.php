@@ -37,4 +37,9 @@ class FacebookProviderTest extends \PHPUnit_Framework_TestCase
 //        $this->assertEquals(2, count($facebookProvider->getPosts(2)->getMessages()));
     }
 
+    public function notify()
+    {
+
+    }
+
 }

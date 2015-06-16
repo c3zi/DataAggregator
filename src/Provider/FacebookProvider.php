@@ -13,7 +13,7 @@ use Facebook\FacebookRequestException;
 use Facebook\FacebookSession;
 use DataAggregator\Entry;
 
-class FacebookProvider implements ProviderInterface
+class FacebookProvider extends AbstractProvider
 {
     /**
      * @var FacebookSession
@@ -30,10 +30,6 @@ class FacebookProvider implements ProviderInterface
      */
     private $accessToken;
 
-    /**
-     * @var Entry
-     */
-    private $entry;
 
     /**
      * @param string $facebookId FacebookId value
@@ -70,6 +66,8 @@ class FacebookProvider implements ProviderInterface
         } catch (\Exception $e) {
             $this->entry->addException($e->getMessage());
         }
+
+        $this->notify();
 
         return $this->entry;
     }
