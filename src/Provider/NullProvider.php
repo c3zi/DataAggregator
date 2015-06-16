@@ -19,13 +19,30 @@ class NullProvider extends AbstractProvider
 {
     const FAKE_ID = '12222112';
 
+    public $messages = [
+        1 => 'Null Message #1',
+        2 => 'Null Message #2',
+        3 => 'Null Message #3',
+        4 => 'Null Message #4',
+    ];
+
+    public $exceptions = [
+        'Exception #1',
+        'Exception #2',
+    ];
+
+
     public function getPosts($limit = 10)
     {
         $this->entry = new Entry(self::FAKE_ID);
-        $this->entry->addMessage(1, 'Null Message #1');
-        $this->entry->addMessage(2, 'Null Message #1');
-        $this->entry->addMessage(3, 'Null Message #1');
-        $this->entry->addMessage(4, 'Null Message #1');
+
+        foreach ($this->messages as $key => $message) {
+            $this->entry->addMessage($key, $message);
+        }
+
+        foreach ($this->exceptions as $exception) {
+            $this->entry->addException($exception);
+        }
 
         $this->notify();
 
