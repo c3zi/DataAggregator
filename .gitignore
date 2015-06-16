@@ -1,3 +1,4 @@
 vendor/
 tests/data/log
+tests/data/report
 .idea/
