@@ -8,6 +8,7 @@
 
 namespace DataAggregator\Observer;
 
+use DataAggregator\Log\LogInterface;
 use DataAggregator\Store\StoreInterface;
 use DataAggregator\Provider\AbstractProvider;
 use DataAggregator\Store\StoreException;
@@ -19,9 +20,15 @@ class StoreObserver implements ObserverInterface
      */
     private $store;
 
-    public function __construct(StoreInterface $store)
+    /**
+     * @var LogInterface
+     */
+    private $logger;
+
+    public function __construct(StoreInterface $store, LogInterface $logger = null)
     {
         $this->store = $store;
+        $this->logger = $logger;
     }
 
     /**
@@ -35,7 +42,9 @@ class StoreObserver implements ObserverInterface
             $this->store->connect();
             $this->store->add($entry);
         } catch (StoreException $ex) {
-
+            if ($this->logger) {
+                $this->logger->add(LogInterface::ERROR, $ex->getMessage());
+            }
         }
     }
 }
