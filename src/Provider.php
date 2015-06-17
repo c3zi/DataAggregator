@@ -25,19 +25,25 @@ class Provider
      * @return FacebookProvider|GoogleProvider
      * @throws \DataAggregator\ProviderException
      */
-    public static function factory($type, array $config)
+    public static function factory($type, array $config, array $observers = [])
     {
         if (!self::validateConfig($type, $config)) {
             throw new ProviderException('Bad configuration.');
         }
 
         if ($type === self::FACEBOOK) {
-            return new FacebookProvider($config['facebook']['facebook_id'], $config['facebook']['access_token']);
+            $provider = new FacebookProvider($config['facebook']['facebook_id'], $config['facebook']['access_token']);
+        } else if ($type === self::GOOGLE) {
+            $provider = new GoogleProvider($config['google']['google_id'], $config['google']['access_token']);
         }
 
-        if ($type === self::GOOGLE) {
-            return new GoogleProvider($config['google']['google_id'], $config['google']['access_token']);
+        if ($observers) {
+            foreach ($observers as $observer) {
+                $provider->attach($observer);
+            }
         }
+
+        return $provider;
     }
 
     /**
