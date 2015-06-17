@@ -9,7 +9,7 @@ CREATE TABLE `aggregator_user` (
 CREATE TABLE `aggregator_entry` (
   `id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `user_id` INT(6) UNSIGNED NOT NULL,
-  `content` TEXT NOT NULL
+  `content` TEXT
 ) ENGINE = InnoDB;
 
 ALTER TABLE `aggregator_entry`

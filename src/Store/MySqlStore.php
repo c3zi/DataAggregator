@@ -98,7 +98,7 @@ class MySqlStore implements StoreInterface
 
         } catch (\PDOException $ex) {
             $this->pdo->rollBack();
-            throw new StoreException('Problem with Insert statement.');
+            throw new StoreException($ex->getMessage());
         }
 
         $rowCount += $stmt->rowCount();

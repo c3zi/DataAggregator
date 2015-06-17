@@ -23,7 +23,7 @@ try {
 
 $connection = new AMQPConnection('localhost', 5672, 'guest', 'guest');
 $channel = $connection->channel();
-$channel->queue_declare('task_aggregator3', false, true, false, false);
+//$channel->queue_declare('task_aggregator3', false, true, false, false);
 
 foreach ($fileProvider->load() as $contact) {
     $msg = new AMQPMessage($contact,
