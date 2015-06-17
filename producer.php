@@ -23,12 +23,13 @@ try {
 
 $connection = new AMQPConnection('localhost', 5672, 'guest', 'guest');
 $channel = $connection->channel();
+$channel->queue_declare('task_aggregator3', false, true, false, false);
 
 foreach ($fileProvider->load() as $contact) {
     $msg = new AMQPMessage($contact,
         array('delivery_mode' => 2) # make message persistent
     );
-    $channel->basic_publish($msg, '', 'task_aggregator2');
+    $channel->basic_publish($msg, '', 'task_aggregator3');
 }
 
 print(sprintf("\n [x] Sent contacts from file: %s\n", $path));

@@ -8,13 +8,16 @@
 
 namespace DataAggregator\Observer;
 
+use DataAggregator\Provider\AbstractProvider;
 
-use SplSubject;
-
-class EmailObserver implements \SplObserver
+class EmailObserver implements ObserverInterface
 {
-    public function update(SplSubject $subject)
+    public function update(AbstractProvider $subject)
     {
-        // TODO: Implement update() method.
+        $entry = $subject->getEntry();
+
+        if ($entry->getExceptions()) {
+            // send an email to administrator
+        }
     }
 }
