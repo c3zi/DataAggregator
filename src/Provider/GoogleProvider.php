@@ -9,7 +9,7 @@
 namespace DataAggregator\Provider;
 
 
-class GoogleProvider implements ProviderInterface
+class GoogleProvider extends AbstractProvider
 {
     public function getPosts($limit = 10)
     {
